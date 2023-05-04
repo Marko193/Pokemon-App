@@ -1,13 +1,10 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import {
-    Card,
-    CardActionArea,
-    CardContent,
-    CardMedia,
-    Typography,
-} from '@mui/material';
+import { Container } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import Title from './components/title';
+import './App.css';
+import Search from './components/search';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -90,5 +87,12 @@ export default function App() {
     console.log('poke', poke);
 
     const classes = useStyles();
-    return <div>Content</div>;
+    return (
+        <>
+            <Container>
+                <Title title="PokeApi"></Title>
+                <Search onHandleSearch={handleSearch} />
+            </Container>
+        </>
+    );
 }
