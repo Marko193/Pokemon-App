@@ -1,33 +1,132 @@
 import * as React from 'react';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
-import ProTip from './ProTip';
+import {
+    Typography,
+    CardMedia,
+    CardContent,
+    Card,
+    CardActionArea,
+} from '@mui/material';
+import { makeStyles } from '@mui/styles';
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+const useStyles = makeStyles((theme) => ({
+    root: {
+        '& > *': {
+            margin: theme.spacing(1),
+            width: '25ch',
+        },
+    },
+    gridList: {
+        width: '100%',
+        height: 'auto',
+    },
+    card: {
+        maxWidth: 160,
+        height: '100%',
+    },
+}));
+
+const tileData = [
+    {
+        img: 'https://images-na.ssl-images-amazon.com/images/I/71qmF0FHj7L._AC_SX679_.jpg',
+        title: 'title',
+    },
+    {
+        img: 'https://images-na.ssl-images-amazon.com/images/I/71qmF0FHj7L._AC_SX679_.jpg',
+        title: 'title',
+    },
+    {
+        img: 'https://images-na.ssl-images-amazon.com/images/I/71qmF0FHj7L._AC_SX679_.jpg',
+        title: 'title',
+    },
+    {
+        img: 'https://images-na.ssl-images-amazon.com/images/I/71qmF0FHj7L._AC_SX679_.jpg',
+        title: 'title',
+    },
+    {
+        img: 'https://images-na.ssl-images-amazon.com/images/I/71qmF0FHj7L._AC_SX679_.jpg',
+        title: 'title',
+    },
+    {
+        img: 'https://images-na.ssl-images-amazon.com/images/I/71qmF0FHj7L._AC_SX679_.jpg',
+        title: 'title',
+    },
+    {
+        img: 'https://images-na.ssl-images-amazon.com/images/I/71qmF0FHj7L._AC_SX679_.jpg',
+        title: 'title',
+    },
+    {
+        img: 'https://images-na.ssl-images-amazon.com/images/I/71qmF0FHj7L._AC_SX679_.jpg',
+        title: 'title',
+    },
+    {
+        img: 'https://images-na.ssl-images-amazon.com/images/I/71qmF0FHj7L._AC_SX679_.jpg',
+        title: 'title',
+    },
+    {
+        img: 'https://images-na.ssl-images-amazon.com/images/I/71qmF0FHj7L._AC_SX679_.jpg',
+        title: 'title',
+    },
+    {
+        img: 'https://images-na.ssl-images-amazon.com/images/I/71qmF0FHj7L._AC_SX679_.jpg',
+        title: 'title',
+    },
+    {
+        img: 'https://images-na.ssl-images-amazon.com/images/I/71qmF0FHj7L._AC_SX679_.jpg',
+        title: 'title',
+    },
+    {
+        img: 'https://images-na.ssl-images-amazon.com/images/I/71qmF0FHj7L._AC_SX679_.jpg',
+        title: 'title',
+    },
+    {
+        img: 'https://images-na.ssl-images-amazon.com/images/I/71qmF0FHj7L._AC_SX679_.jpg',
+        title: 'title',
+    },
+    {
+        img: 'https://images-na.ssl-images-amazon.com/images/I/71qmF0FHj7L._AC_SX679_.jpg',
+        title: 'title',
+    },
+    {
+        img: 'https://images-na.ssl-images-amazon.com/images/I/71qmF0FHj7L._AC_SX679_.jpg',
+        title: 'title',
+    },
+    {
+        img: 'https://images-na.ssl-images-amazon.com/images/I/71qmF0FHj7L._AC_SX679_.jpg',
+        title: 'title',
+    },
+    {
+        img: 'https://images-na.ssl-images-amazon.com/images/I/71qmF0FHj7L._AC_SX679_.jpg',
+        title: 'title',
+    },
+];
 
 export default function App() {
-  return (
-    <Container maxWidth="sm">
-      <Box sx={{ my: 4 }}>
-        <Typography variant="h4" component="h1" gutterBottom>
-          Material UI Create React App example
-        </Typography>
-        <ProTip />
-        <Copyright />
-      </Box>
-    </Container>
-  );
+    const classes = useStyles();
+    return (
+        <div className="App">
+            {tileData.map((tile, index) => (
+                <Card className={classes.card} key={index}>
+                    <CardActionArea>
+                        <CardMedia
+                            component="img"
+                            alt="Contemplative Reptile"
+                            height="160"
+                            image={'' + tile.img}
+                            title="Contemplative Reptile"
+                        />
+                        <CardContent>
+                            <Typography
+                                gutterBottom
+                                variant="body2"
+                                component="h2"
+                                noWrap
+                            >
+                                {tile.title}
+                            </Typography>
+                        </CardContent>
+                    </CardActionArea>
+                </Card>
+            ))}
+        </div>
+    );
 }
