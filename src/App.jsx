@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { Container } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import Title from './components/title';
 import './App.css';
 import Search from './components/search';
+import Grid from './layout/grid';
+import { Container } from '@mui/material';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -90,8 +91,21 @@ export default function App() {
     return (
         <>
             <Container>
-                <Title title="PokeApi"></Title>
+                <Title title="PokeApi React App"></Title>
                 <Search onHandleSearch={handleSearch} />
+                {notFound ? (
+                    <div style={{ textAlign: 'center' }}>Pokemon not found</div>
+                ) : (
+                    <>
+                        {poke.length !== 0 ? (
+                            <Grid pokemons={poke} next={nextPokemon} />
+                        ) : (
+                            <div style={{ textAlign: 'center' }}>
+                                Loading...
+                            </div>
+                        )}
+                    </>
+                )}
             </Container>
         </>
     );
