@@ -2,12 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { searchIcon } from '../utils/icons';
 
-export default function Modal({ pokemon, onHandleModal }) {
+export default function ModalContent({ pokemon }) {
     console.log('pokemon', pokemon);
-
-    const handleModal = () => {
-        onHandleModal();
-    };
 
     const colors = [
         '#FC6B6E',
@@ -20,9 +16,6 @@ export default function Modal({ pokemon, onHandleModal }) {
 
     return (
         <div className="modal">
-            <button className="modal__close" onClick={handleModal}>
-                Close X
-            </button>
             <div className="modal__content">
                 <div
                     className="modal__content-features"
@@ -127,7 +120,6 @@ export default function Modal({ pokemon, onHandleModal }) {
     );
 }
 
-Modal.propTypes = {
+ModalContent.propTypes = {
     pokemon: PropTypes.object,
-    onHandleModal: PropTypes.func,
 };

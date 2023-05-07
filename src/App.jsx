@@ -5,7 +5,8 @@ import Title from './components/title';
 import './App.css';
 import Search from './components/search';
 import Grid from './layout/grid';
-import { Container } from '@mui/material';
+import { CircularProgress, Container } from '@mui/material';
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -44,6 +45,9 @@ export default function App() {
         const api = await fetch(
             `https://pokeapi.co/api/v2/pokemon/${textSearch.toLowerCase()}`
         );
+
+        console.log('api search', api);
+
         const data = await api.json().catch(() => undefined);
         if (!data) {
             setNotFound(true);
@@ -55,10 +59,12 @@ export default function App() {
     };
 
     const showPokemons = async (limit = 20, offset = 0) => {
-        const api = await fetch(
+        const { data } = await axios.get(
             `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`
         );
-        const data = await api.json();
+
+        console.log('data', data);
+
         const promises = data.results.map(async (pokemon) => {
             const result = await fetch(pokemon.url);
             const res = await result.json();
@@ -66,6 +72,8 @@ export default function App() {
         });
 
         const results = await Promise.all(promises);
+
+        console.log('results', results);
 
         setSearch([]);
         setPokemons([...pokemons, ...results]);
@@ -85,27 +93,25 @@ export default function App() {
 
     const poke = search.length > 0 ? search : pokemons;
 
-    console.log('poke', poke);
-
     const classes = useStyles();
     return (
         <>
             <Container>
-                <Title title="PokeApi React App"></Title>
+                <Title title="PokeApi React App" />
                 <Search onHandleSearch={handleSearch} />
-                {notFound ? (
-                    <div style={{ textAlign: 'center' }}>Pokemon not found</div>
-                ) : (
-                    <>
-                        {poke.length !== 0 ? (
-                            <Grid pokemons={poke} next={nextPokemon} />
-                        ) : (
-                            <div style={{ textAlign: 'center' }}>
-                                Loading...
-                            </div>
-                        )}
-                    </>
-                )}
+                <div style={{ textAlign: 'center' }}>
+                    {notFound ? (
+                        <div>Pokemon not found</div>
+                    ) : (
+                        <>
+                            {poke.length !== 0 ? (
+                                <Grid pokemons={poke} next={nextPokemon} />
+                            ) : (
+                                <CircularProgress />
+                            )}
+                        </>
+                    )}
+                </div>
             </Container>
         </>
     );

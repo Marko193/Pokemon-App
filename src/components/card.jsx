@@ -1,22 +1,20 @@
 import React, { useState } from 'react';
 import PokeballImage from '../assets/icons/pokeball.png';
 import { any } from 'prop-types';
-import Modal from './modal';
 import { searchIcon } from '../utils/icons';
+import { Modal } from '@mui/material';
+import ModalContent from './modalContent';
 
 export default function Card({ pokemon }) {
-    const [showModal, setShowModal] = useState(false);
-    const handleModal = () => {
-        console.log('clicked');
-        setShowModal(!showModal);
-        document.body.classList.toggle('dark');
-    };
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
     return (
         <>
             <div
                 className="card"
-                onClick={handleModal}
+                onClick={handleOpen}
                 style={{
                     backgroundColor: `var(--bg-poke-color-light-${pokemon.types[0].type.name})`,
                 }}
@@ -54,9 +52,14 @@ export default function Card({ pokemon }) {
                     loading="lazy"
                 />
             </div>
-            {showModal && (
-                <Modal onHandleModal={handleModal} pokemon={pokemon} />
-            )}
+            <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <ModalContent pokemon={pokemon} />
+            </Modal>
         </>
     );
 }
