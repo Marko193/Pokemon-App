@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import PokeballImage from '../assets/icons/pokeball.png';
 import { any } from 'prop-types';
+import Modal from './modal';
+import { searchIcon } from '../utils/icons';
 
 export default function Card({ pokemon }) {
     const [showModal, setShowModal] = useState(false);
     const handleModal = () => {
         console.log('clicked');
-        // setShowModal(!showModal);
-        // document.body.classList.toggle('dark');
+        setShowModal(!showModal);
+        document.body.classList.toggle('dark');
     };
 
     return (
@@ -35,7 +37,7 @@ export default function Card({ pokemon }) {
                 >
                     <img
                         className="card__badge-Icon"
-                        // src={searchIcon(pokemon.types[0].type.name)}
+                        src={searchIcon(pokemon.types[0].type.name)}
                         alt=""
                     />
                     <span className="card__badge-text">
@@ -52,9 +54,9 @@ export default function Card({ pokemon }) {
                     loading="lazy"
                 />
             </div>
-            {/*{showModal && (*/}
-            {/*    <Modal onHandleModal={handleModal} pokemon={pokemon} />*/}
-            {/*)}*/}
+            {showModal && (
+                <Modal onHandleModal={handleModal} pokemon={pokemon} />
+            )}
         </>
     );
 }

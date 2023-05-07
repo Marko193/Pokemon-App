@@ -1,6 +1,6 @@
 import React from 'react';
 import Card from '../components/card';
-import PropTypes, { any, array } from 'prop-types';
+import PropTypes, { any } from 'prop-types';
 import Search from '../components/search';
 
 export default function Grid({ pokemons, next }) {
@@ -31,6 +31,6 @@ export default function Grid({ pokemons, next }) {
 }
 
 Grid.propTypes = {
-    pokemons: any,
+    pokemons: PropTypes.any,
     next: PropTypes.any,
 };
