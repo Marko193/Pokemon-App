@@ -3,11 +3,7 @@ import Card from '../components/card';
 import PropTypes, { any } from 'prop-types';
 import Search from '../components/search';
 
-export default function Grid({ pokemons, next }) {
-    const handleButton = () => {
-        next();
-    };
-
+export default function Grid({ pokemons }) {
     return (
         <div className="grid">
             <div className="grid__pokemon">
@@ -15,22 +11,10 @@ export default function Grid({ pokemons, next }) {
                     <Card key={poke.name} pokemon={poke} />
                 ))}
             </div>
-            {pokemons.length >= 10 && (
-                <div className="grid__wrapper-button">
-                    <button
-                        className="grid__button"
-                        type="button"
-                        onClick={handleButton}
-                    >
-                        Show more
-                    </button>
-                </div>
-            )}
         </div>
     );
 }
 
 Grid.propTypes = {
     pokemons: PropTypes.any,
-    next: PropTypes.any,
 };
