@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
-import SearchIcon from '../assets/icons/busqueda.svg';
 import PropTypes from 'prop-types';
+import { Button, Divider, InputBase, Paper } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+import SearchIcon from '@mui/icons-material/Search';
+import DirectionsIcon from '@mui/icons-material/Directions';
 
 export default function Search({ onHandleSearch }) {
     const [search, setSearch] = useState('');
@@ -22,19 +26,38 @@ export default function Search({ onHandleSearch }) {
     return (
         <div className="search">
             <div className="search__wrapper">
-                <input
-                    className="search__input"
-                    type="search"
-                    onChange={handleSearch}
-                    placeholder="Enter the pokemon ID or name..."
-                    onKeyDown={handleClickSearch}
-                    autoFocus
-                />
-                <img className="search__icon" src={SearchIcon} alt="" />
+                <Paper
+                    sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        width: '95%',
+                        height: '40px',
+                    }}
+                >
+                    <IconButton sx={{ p: '10px' }} aria-label="menu">
+                        <SearchIcon />
+                    </IconButton>
+                    <InputBase
+                        sx={{
+                            width: '100%',
+                        }}
+                        placeholder="Enter pokemon's ID or name..."
+                        onChange={handleSearch}
+                        onKeyDown={handleClickSearch}
+                        autoFocus
+                    />
+                </Paper>
             </div>
-            <button className="search__button" onClick={handleClickSearch}>
+            <Button
+                variant="contained"
+                disabled={search === ''}
+                onClick={handleClickSearch}
+            >
                 Search
-            </button>
+            </Button>
+            {/*<button className="search__button" onClick={handleClickSearch}>*/}
+            {/*    Search*/}
+            {/*</button>*/}
         </div>
     );
 }

@@ -29,8 +29,6 @@ export default function App() {
             `https://pokeapi.co/api/v2/pokemon/${textSearch.toLowerCase()}`
         );
 
-        console.log('data', data);
-
         if (!data) {
             setNotFound(true);
             return;
