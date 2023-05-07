@@ -15,7 +15,7 @@ export default function Grid({ pokemons, next }) {
                     <Card key={poke.name} pokemon={poke} />
                 ))}
             </div>
-            {pokemons.length >= 20 && (
+            {pokemons.length >= 10 && (
                 <div className="grid__wrapper-button">
                     <button
                         className="grid__button"

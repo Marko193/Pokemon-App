@@ -55,9 +55,6 @@ export default function Search({ onHandleSearch }) {
             >
                 Search
             </Button>
-            {/*<button className="search__button" onClick={handleClickSearch}>*/}
-            {/*    Search*/}
-            {/*</button>*/}
         </div>
     );
 }
