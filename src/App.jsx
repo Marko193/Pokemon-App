@@ -8,23 +8,6 @@ import Grid from './layout/grid';
 import { CircularProgress, Container } from '@mui/material';
 import axios from 'axios';
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        '& > *': {
-            margin: theme.spacing(1),
-            width: '25ch',
-        },
-    },
-    gridList: {
-        width: '100%',
-        height: 'auto',
-    },
-    card: {
-        maxWidth: 160,
-        height: '100%',
-    },
-}));
-
 export default function App() {
     const [pokemons, setPokemons] = useState([]);
     const [total, setTotal] = useState(0);
@@ -42,13 +25,12 @@ export default function App() {
         setNotFound(false);
         setSearching(true);
 
-        const api = await fetch(
+        const { data } = await axios.get(
             `https://pokeapi.co/api/v2/pokemon/${textSearch.toLowerCase()}`
         );
 
-        console.log('api search', api);
+        console.log('data', data);
 
-        const data = await api.json().catch(() => undefined);
         if (!data) {
             setNotFound(true);
             return;
@@ -63,17 +45,12 @@ export default function App() {
             `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`
         );
 
-        console.log('data', data);
-
         const promises = data.results.map(async (pokemon) => {
-            const result = await fetch(pokemon.url);
-            const res = await result.json();
-            return res;
+            const response = await axios.get(pokemon.url);
+            return response.data;
         });
 
         const results = await Promise.all(promises);
-
-        console.log('results', results);
 
         setSearch([]);
         setPokemons([...pokemons, ...results]);
@@ -93,7 +70,6 @@ export default function App() {
 
     const poke = search.length > 0 ? search : pokemons;
 
-    const classes = useStyles();
     return (
         <>
             <Container>

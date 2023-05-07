@@ -26,7 +26,7 @@ export default function Search({ onHandleSearch }) {
                     className="search__input"
                     type="search"
                     onChange={handleSearch}
-                    placeholder="Enter the pokemon name..."
+                    placeholder="Enter the pokemon ID or name..."
                     onKeyDown={handleClickSearch}
                     autoFocus
                 />
