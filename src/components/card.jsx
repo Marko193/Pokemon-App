@@ -5,8 +5,9 @@ import { any } from 'prop-types';
 export default function Card({ pokemon }) {
     const [showModal, setShowModal] = useState(false);
     const handleModal = () => {
-        setShowModal(!showModal);
-        document.body.classList.toggle('dark');
+        console.log('clicked');
+        // setShowModal(!showModal);
+        // document.body.classList.toggle('dark');
     };
 
     return (

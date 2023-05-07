@@ -40,5 +40,5 @@ export default function Search({ onHandleSearch }) {
 }
 
 Search.propTypes = {
-    onHandleSearch: () => PropTypes.any,
+    onHandleSearch: PropTypes.any,
 };

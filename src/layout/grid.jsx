@@ -32,5 +32,5 @@ export default function Grid({ pokemons, next }) {
 
 Grid.propTypes = {
     pokemons: any,
-    next: () => PropTypes.any,
+    next: PropTypes.any,
 };
