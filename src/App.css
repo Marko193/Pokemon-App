@@ -9,7 +9,7 @@
 body{
   background-color: var(--bg-light-color);
   position: relative;
-  /* overflow-x: hidden; */
+  font-family: 'Open Sans', sans-serif !important;
 }
 
 .container{
@@ -188,7 +188,7 @@ body{
   justify-content: space-between;
   width: 100%;
   position: relative;
-  padding-left: 10px;
+  padding-left: 20px;
   top: 20px;
 }
 

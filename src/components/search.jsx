@@ -40,6 +40,8 @@ export default function Search({ onHandleSearch }) {
                     <InputBase
                         sx={{
                             width: '100%',
+                            fontFamily: 'Open Sans, sans-serif !important',
+                            fontWeight: 'bold',
                         }}
                         placeholder="Enter pokemon's ID or name..."
                         onChange={handleSearch}
@@ -52,6 +54,10 @@ export default function Search({ onHandleSearch }) {
                 variant="contained"
                 disabled={search === ''}
                 onClick={handleClickSearch}
+                sx={{
+                    fontFamily: 'Open Sans, sans-serif !important',
+                    fontWeight: 'bold',
+                }}
             >
                 Search
             </Button>
