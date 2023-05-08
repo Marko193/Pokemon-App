@@ -1,7 +1,6 @@
 import { put, call, takeEvery, all, fork } from 'redux-saga/effects';
 
 import {
-    getEmptyListBySearch,
     getPokemonsListBySearchRequest,
     getPokemonsListBySearchSuccess,
     getPokemonsListRequest,
@@ -26,8 +25,6 @@ const searchPokemonsHelper = async (textSearch) => {
     const response = await axios.get(
         `https://pokeapi.co/api/v2/pokemon/${textSearch.toLowerCase()}`
     );
-
-    console.log('data', response);
 
     if (response.status === 404) {
         return [];

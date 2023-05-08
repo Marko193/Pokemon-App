@@ -36,12 +36,6 @@ export const pokemons = (state, action) => {
                 isLoading: false,
                 notFound: action.payload.notFound,
             };
-
-        case 'GET_EMPTY_LIST_BY_SEARCH':
-            return {
-                ...state,
-                isLoading: false,
-            };
         default:
             return state;
     }

@@ -28,10 +28,3 @@ export const getPokemonsListBySearchSuccess = (
         notFound,
     },
 });
-
-export const getEmptyListBySearch = (isLoading) => ({
-    type: 'GET_EMPTY_LIST_BY_SEARCH',
-    payload: {
-        isLoading,
-    },
-});

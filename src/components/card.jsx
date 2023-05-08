@@ -11,8 +11,6 @@ export default function Card({ pokemon }) {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    // console.log('pokemon', pokemon);
-
     return (
         <>
             <div
@@ -62,7 +60,9 @@ export default function Card({ pokemon }) {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <ModalContent pokemon={pokemon} />
+                <>
+                    <ModalContent pokemon={pokemon} />
+                </>
             </Modal>
         </>
     );

@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Divider, InputBase, Paper } from '@mui/material';
+import { Button, InputBase, Paper } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
-import DirectionsIcon from '@mui/icons-material/Directions';
 
-export default function Search({ onHandleSearch }) {
+export default function Search({ onHandleSearch, isLoading }) {
     const [search, setSearch] = useState('');
 
     const handleSearch = (e) => {
@@ -18,7 +16,7 @@ export default function Search({ onHandleSearch }) {
 
     const handleClickSearch = (e) => {
         if (e.keyCode === 13 || e.type === 'click') {
-            e.preventDefault();
+            // e.preventDefault();
             onHandleSearch(search);
         }
     };
@@ -52,7 +50,7 @@ export default function Search({ onHandleSearch }) {
             </div>
             <Button
                 variant="contained"
-                disabled={search === ''}
+                disabled={search === '' || isLoading}
                 onClick={handleClickSearch}
                 sx={{
                     fontFamily: 'Open Sans, sans-serif !important',
@@ -67,4 +65,5 @@ export default function Search({ onHandleSearch }) {
 
 Search.propTypes = {
     onHandleSearch: PropTypes.any,
+    isLoading: PropTypes.bool,
 };
