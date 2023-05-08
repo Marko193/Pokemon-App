@@ -4,11 +4,14 @@ import { any } from 'prop-types';
 import { searchIcon } from '../utils/searchIcon';
 import { Modal } from '@mui/material';
 import ModalContent from './modalContent';
+import { addCapitalLetter } from '../utils/general';
 
 export default function Card({ pokemon }) {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+
+    // console.log('pokemon', pokemon);
 
     return (
         <>
@@ -38,19 +41,20 @@ export default function Card({ pokemon }) {
                         src={searchIcon(pokemon.types[0].type.name)}
                         alt=""
                     />
-                    <span className="card__badge-text">
-                        {pokemon.types[0].type.name}
-                    </span>
                 </div>
-                <h3 className="card__name">{pokemon.name}</h3>
-                <img
-                    className="card__image"
-                    width={120}
-                    height={120}
-                    src={pokemon.sprites['front_default']}
-                    alt=""
-                    loading="lazy"
-                />
+                <div className="card__title-image-block">
+                    <h3 className="card__name">
+                        {addCapitalLetter(pokemon.name)}
+                    </h3>
+                    <img
+                        className="card__image"
+                        width={120}
+                        height={120}
+                        src={pokemon.sprites['front_default']}
+                        alt=""
+                        loading="lazy"
+                    />
+                </div>
             </div>
             <Modal
                 open={open}

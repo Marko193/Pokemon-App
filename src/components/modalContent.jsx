@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { searchIcon } from '../utils/searchIcon';
 import { colors } from '../constants/colors';
+import { addCapitalLetter } from '../utils/general';
 
 export default function ModalContent({ pokemon }) {
     console.log('pokemon', pokemon);
@@ -22,7 +23,6 @@ export default function ModalContent({ pokemon }) {
                                 src={searchIcon(pokemon.types[0].type.name)}
                                 alt=""
                             />
-                            {pokemon.types[0].type.name}
                         </span>
                         {pokemon['past_types'].length > 0 && (
                             <span className="modal__content-featuresGeneration">
@@ -31,12 +31,8 @@ export default function ModalContent({ pokemon }) {
                         )}
                     </div>
                     <div className="modal__content-featuresLeft">
-                        <span className="modal__content-featuresHeight">
-                            Height: {pokemon.height}
-                        </span>
-                        <span className="modal__content-featuresWeight">
-                            weight : {pokemon.weight}
-                        </span>
+                        <span>Height: {pokemon.height}</span>
+                        <span>Weight: {pokemon.weight}</span>
                     </div>
                 </div>
                 <div className="modal__content-description">
@@ -46,12 +42,8 @@ export default function ModalContent({ pokemon }) {
                         alt=""
                     />
                     <h3 className="modal__content-descriptionTitle">
-                        {pokemon.name}
+                        {addCapitalLetter(pokemon.name)}
                     </h3>
-                    <p className="modal__content-descriptionParagraph">
-                        Lorem ipsum, dolor sit amet consectetur adipisicing
-                        elit. Ex quaerat eligendi{' '}
-                    </p>
                 </div>
                 <div className="modal__content-other">
                     <div className="modal__content-otherBreadcrumb">
@@ -63,13 +55,13 @@ export default function ModalContent({ pokemon }) {
                                 key={ability.name}
                                 className="modal__content-otherBreadcrumbAbility"
                             >
-                                {ability.name}
+                                {addCapitalLetter(ability.name)}
                             </span>
                         ))}
                     </div>
                     <div className="modal__content-otherStats">
                         <h4 className="modal__content-otherStatsTitle">
-                            Stats
+                            Characteristics
                         </h4>
                         {pokemon.stats.map((stat, index) => (
                             <div
@@ -78,10 +70,10 @@ export default function ModalContent({ pokemon }) {
                             >
                                 <div className="modal__content-otherStatContent">
                                     <span className="modal__content-otherStatContentPower">
-                                        {stat.stat.name}
+                                        {addCapitalLetter(stat.stat.name)}
                                     </span>
                                     <span className="modal__content-otherStatContentValue">
-                                        {stat.base_stat}
+                                        {stat.base_stat} / 100
                                     </span>
                                 </div>
                                 <div className="modal__content-otherStatTimeLine">

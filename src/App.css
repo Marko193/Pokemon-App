@@ -159,28 +159,37 @@ body{
   position: absolute;
   top: 0;
   right: 0;
-  padding: 2px 5px;
+  padding: 5px 5px;
   border-radius: 5px;
   font-size: 0.8em;
   text-align: center;
   color: rgba(0, 0, 0, 0.739);
   font-weight: 700;
-
   display: flex;
-  /* align-items: center; */
-  justify-content: flex-start;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .card__badge-Icon{
   display: inline-block;
-  margin-right: 10px;
-  width: 20%;
+  width: 25px;
   height: 100%;
 }
 
 .card__badge-text{
   display: inline-block;
   text-align: center;
+}
+
+.card__title-image-block {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  position: relative;
+  padding-left: 10px;
+  top: 20px;
 }
 
 .card__image{
@@ -244,10 +253,7 @@ body{
 }
 
 .modal__content-features span:not(.modal__content-featuresHabitat){
-  /* background-color: #e3d7b2; */
-  border-radius: 5px;
   padding: 0 10px;
-  border: 1px solid black;
 }
 
 .modal__content-description{
@@ -266,7 +272,6 @@ body{
 
 .modal__content-descriptionTitle{
   font-size: 1.4em;
-  text-transform: uppercase;
 }
 
 .modal__content-descriptionParagraph{
