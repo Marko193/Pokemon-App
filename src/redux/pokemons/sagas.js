@@ -3,8 +3,17 @@ import { put, call, takeEvery, all, fork } from 'redux-saga/effects';
 import { getPokemonsListRequest, getPokemonsListSuccess } from './actions';
 import axios from 'axios';
 
-const getPokemons = () => {
-    return axios.get(`https://pokeapi.co/api/v2/pokemon?limit=200&offset=0`);
+const getPokemons = async () => {
+    const { data } = await axios.get(
+        `https://pokeapi.co/api/v2/pokemon?limit=200&offset=0`
+    );
+
+    const promises = data.results.map(async (pokemon) => {
+        const response = await axios.get(pokemon.url);
+        return response.data;
+    });
+
+    return await Promise.all(promises);
 };
 
 export function* sagaPokemonsListWatcher() {
@@ -14,11 +23,11 @@ export function* sagaPokemonsListWatcher() {
 export function* sagaPokemonsListWorker() {
     try {
         yield put(getPokemonsListRequest(true));
-        const responsePokemonsList = yield call(getPokemons);
-        console.log('responsePokemonsList sagas', responsePokemonsList);
-        // yield put(getEmployeeListSuccess(responsePokemonsList.data, false));
+        const pokemons = yield call(getPokemons);
+        // console.log('pokemons sagas results', pokemons);
+        yield put(getPokemonsListSuccess(pokemons, false));
     } catch (e) {
-        // yield put(getEmployeeListSuccess([], false));
+        yield put(getPokemonsListSuccess([], false));
     }
 }
 

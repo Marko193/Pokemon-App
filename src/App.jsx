@@ -6,11 +6,20 @@ import Search from './components/search';
 import Grid from './layout/grid';
 import { CircularProgress, Container, TablePagination } from '@mui/material';
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function App() {
-    const [pokemons, setPokemons] = useState([]);
-    const [total, setTotal] = useState(0);
+    const dispatch = useDispatch();
+
+    const pokemonsData = useSelector(
+        ({ pokemons: { pokemons, isLoading } }) => ({
+            pokemons,
+            isLoading,
+        })
+    );
+
+    console.log('pokemonsData', pokemonsData);
+
     const [notFound, setNotFound] = useState(false);
     const [search, setSearch] = useState([]);
     const [searching, setSearching] = useState(false);
@@ -26,7 +35,15 @@ export default function App() {
         setpg(0);
     };
 
+    useEffect(() => {
+        if (!searching) {
+            dispatch({ type: 'GET_POKEMONS_LIST' });
+        }
+    }, []);
+
     const handleSearch = async (textSearch) => {
+        console.log('textSearch', textSearch);
+
         if (!textSearch) {
             setSearch([]);
             setNotFound(false);
@@ -49,37 +66,26 @@ export default function App() {
         setSearching(false);
     };
 
-    const showPokemons = async (limit, offset) => {
-        const { data } = await axios.get(
-            `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`
-        );
+    // const showPokemons = async (limit, offset) => {
+    //     const { data } = await axios.get(
+    //         `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`
+    //     );
+    //
+    //     const promises = data.results.map(async (pokemon) => {
+    //         const response = await axios.get(pokemon.url);
+    //         return response.data;
+    //     });
+    //
+    //     const results = await Promise.all(promises);
+    //
+    //     setSearch([]);
+    //     setPokemons(results);
+    //     setNotFound(false);
+    //     setTotal(total + results.length);
+    // };
 
-        const promises = data.results.map(async (pokemon) => {
-            const response = await axios.get(pokemon.url);
-            return response.data;
-        });
-
-        const results = await Promise.all(promises);
-
-        setSearch([]);
-        setPokemons(results);
-        setNotFound(false);
-        setTotal(total + results.length);
-    };
-
-    useEffect(() => {
-        if (!searching) {
-            // if we have more time - we can add ability to upload new pokemons, if we watched more than 500 - add + 200 to the old ones
-            showPokemons(200, 0);
-        }
-    }, []);
-
-    const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch({ type: 'GET_POKEMONS_LIST' });
-    }, []);
-
-    const pokemonsList = search.length > 0 ? search : pokemons;
+    const pokemonsList = search.length > 0 ? search : pokemonsData.pokemons;
+    console.log('pokemonsList', pokemonsList);
     return (
         <>
             <Container>
@@ -90,7 +96,8 @@ export default function App() {
                         <div>No data were found.</div>
                     ) : (
                         <>
-                            {pokemonsList.length !== 0 ? (
+                            {pokemonsList.length !== 0 &&
+                            pokemonsData.isLoading === false ? (
                                 <>
                                     <Grid
                                         pokemons={pokemonsList.slice(
