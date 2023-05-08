@@ -6,6 +6,7 @@ import Search from './components/search';
 import Grid from './layout/grid';
 import { CircularProgress, Container, TablePagination } from '@mui/material';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
 
 export default function App() {
     const [pokemons, setPokemons] = useState([]);
@@ -71,6 +72,11 @@ export default function App() {
             // if we have more time - we can add ability to upload new pokemons, if we watched more than 500 - add + 200 to the old ones
             showPokemons(200, 0);
         }
+    }, []);
+
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch({ type: 'GET_POKEMONS_LIST' });
     }, []);
 
     const pokemonsList = search.length > 0 ? search : pokemons;

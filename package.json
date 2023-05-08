@@ -20,7 +20,11 @@
     "prop-types": "^15.8.1",
     "react": "latest",
     "react-dom": "latest",
-    "react-scripts": "latest"
+    "react-redux": "^8.0.5",
+    "react-scripts": "latest",
+    "redux": "^4.2.1",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-saga": "^1.2.3"
   },
   "browserslist": {
     "production": [
