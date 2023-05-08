@@ -12,13 +12,17 @@ export default function App() {
     const dispatch = useDispatch();
 
     const pokemonsData = useSelector(
-        ({ pokemons: { pokemons, isLoading } }) => ({
+        ({ pokemons: { pokemons, isLoading, notFound } }) => ({
             pokemons,
             isLoading,
+            notFound,
         })
     );
 
-    console.log('pokemonsData', pokemonsData);
+    // console.log('pokemonsData', pokemonsData);
+
+    const pokemonState = useSelector((state) => state);
+    console.log('pokemonState', pokemonState);
 
     const [notFound, setNotFound] = useState(false);
     const [search, setSearch] = useState([]);
@@ -43,28 +47,30 @@ export default function App() {
 
     const handleSearch = async (textSearch) => {
         console.log('textSearch', textSearch);
-
-        if (!textSearch) {
-            setSearch([]);
-            setNotFound(false);
-            return;
-        }
-
-        setNotFound(false);
-        setSearching(true);
-
-        const { data } = await axios.get(
-            `https://pokeapi.co/api/v2/pokemon/${textSearch.toLowerCase()}`
-        );
-
-        if (!data) {
-            setNotFound(true);
-            return;
-        } else {
-            setSearch([data]);
-        }
-        setSearching(false);
+        dispatch({ type: 'GET_POKEMONS_LIST_BY_SEARCH', payload: textSearch });
+        // if (!textSearch) {
+        //     setSearch([]);
+        //     setNotFound(false);
+        //     return;
+        // }
+        //
+        // setNotFound(false);
+        // setSearching(true);
+        //
+        // const { data } = await axios.get(
+        //     `https://pokeapi.co/api/v2/pokemon/${textSearch.toLowerCase()}`
+        // );
+        //
+        // if (!data) {
+        //     setNotFound(true);
+        //     return;
+        // } else {
+        //     setSearch([data]);
+        // }
+        // setSearching(false);
     };
+
+    const data = (state) => state.pokemons;
 
     // const showPokemons = async (limit, offset) => {
     //     const { data } = await axios.get(
@@ -85,14 +91,14 @@ export default function App() {
     // };
 
     const pokemonsList = search.length > 0 ? search : pokemonsData.pokemons;
-    console.log('pokemonsList', pokemonsList);
+    // console.log('pokemonsList', pokemonsList);
     return (
         <>
             <Container>
                 <Title title="PokeApi React App" />
                 <Search onHandleSearch={handleSearch} />
                 <div style={{ textAlign: 'center' }}>
-                    {notFound ? (
+                    {pokemonsData.notFound ? (
                         <div>No data were found.</div>
                     ) : (
                         <>
