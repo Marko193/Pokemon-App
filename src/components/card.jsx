@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PokeballImage from '../assets/icons/pokeball.png';
 import { any } from 'prop-types';
-import { searchIcon } from '../utils/icons';
+import { searchIcon } from '../utils/searchIcon';
 import { Modal } from '@mui/material';
 import ModalContent from './modalContent';
 

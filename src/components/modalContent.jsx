@@ -1,18 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { searchIcon } from '../utils/icons';
+import { searchIcon } from '../utils/searchIcon';
+import { colors } from '../constants/colors';
 
 export default function ModalContent({ pokemon }) {
     console.log('pokemon', pokemon);
-
-    const colors = [
-        '#FC6B6E',
-        '#2196F3',
-        '#094BE8',
-        '#2196F3',
-        '#3ED1E0',
-        '#CF9B48',
-    ];
 
     return (
         <div className="modal">

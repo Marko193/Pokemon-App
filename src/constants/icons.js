@@ -17,31 +17,23 @@ import rock from '../assets/icons/pokemon/types/rock.png';
 import steel from '../assets/icons/pokemon/types/steel.png';
 import water from '../assets/icons/pokemon/types/water.png';
 
-const icons = {
-   bug: bug,
-   dark: dark, 
-   dragon: dragon,
-   electric: electric,
-   fairy: fairy,
-   fighting: fighting,
-   fire: fire,
-   flying: flying,
-   ghost: ghost,
-   grass: grass,
-   ground: ground,
-   ice: ice,
-   normal: normal, 
-   poison: poison,
-   psychic: psychic,
-   rock: rock,
-   steel: steel, 
-   water: water
-} 
-
-export function searchIcon(search){
-   
-   if(search){
-      search = Object.entries(icons).filter(icon => icon[0] === search);
-      return search[0][1];
-   }
-}
+export const icons = {
+    bug: bug,
+    dark: dark,
+    dragon: dragon,
+    electric: electric,
+    fairy: fairy,
+    fighting: fighting,
+    fire: fire,
+    flying: flying,
+    ghost: ghost,
+    grass: grass,
+    ground: ground,
+    ice: ice,
+    normal: normal,
+    poison: poison,
+    psychic: psychic,
+    rock: rock,
+    steel: steel,
+    water: water,
+};
